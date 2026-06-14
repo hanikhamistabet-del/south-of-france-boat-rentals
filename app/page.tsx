@@ -92,7 +92,6 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-slate-900 p-6 rounded-2xl">
             <h3 className="text-2xl font-bold">Free Listings</h3>
-
             <p className="mt-4 text-gray-400">
               Add your boat in minutes and start receiving inquiries.
             </p>
@@ -100,7 +99,6 @@ export default function Home() {
 
           <div className="bg-slate-900 p-6 rounded-2xl">
             <h3 className="text-2xl font-bold">No Commissions</h3>
-
             <p className="mt-4 text-gray-400">
               Keep 100% of your rental income.
             </p>
@@ -108,7 +106,6 @@ export default function Home() {
 
           <div className="bg-slate-900 p-6 rounded-2xl">
             <h3 className="text-2xl font-bold">Direct Contact</h3>
-
             <p className="mt-4 text-gray-400">
               Owners and renters communicate directly.
             </p>
@@ -125,7 +122,7 @@ export default function Home() {
 
           <p className="mt-6 text-gray-400 text-lg">
             Basic listings are free forever. Premium listings receive featured
-            placement and extra exposure.
+            placement and additional exposure.
           </p>
         </div>
       </section>
@@ -170,6 +167,9 @@ export default function Home() {
                 <a href="/boats">Browse Boats</a>
                 <a href="/signup">Create Account</a>
                 <a href="/login">Log In</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/contact">Contact Us</a>
               </div>
             </div>
 
@@ -178,10 +178,17 @@ export default function Home() {
 
               <a
                 href="mailto:sofboatrental@gmail.com"
-                className="text-gray-400"
+                className="text-gray-400 block"
               >
                 sofboatrental@gmail.com
               </a>
+
+              <p className="text-gray-500 text-sm mt-4">
+                SOF Boat Rentals acts solely as a listing platform. Boat owners
+                and renters communicate directly. Rental agreements, payments,
+                insurance, licensing, navigation, and legal responsibilities
+                remain solely between the parties involved.
+              </p>
             </div>
           </div>
         </div>
