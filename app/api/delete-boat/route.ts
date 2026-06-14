@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function POST(request: Request) {
   try {
@@ -7,53 +7,32 @@ export async function POST(request: Request) {
 
     if (!boatId) {
       return NextResponse.json(
-        { error: "Boat ID is required" },
+        { error: "Boat ID required" },
         { status: 400 }
       );
     }
 
-    const { error: imageError } = await supabase
+    await supabaseAdmin
       .from("boat_images")
       .delete()
       .eq("boat_id", boatId);
 
-    if (imageError) {
-      console.error("Image delete error:", imageError);
-
-      return NextResponse.json(
-        { error: imageError.message },
-        { status: 500 }
-      );
-    }
-
-    const { data, error: boatError } = await supabase
+    const { error } = await supabaseAdmin
       .from("boats")
       .delete()
-      .eq("id", boatId)
-      .select();
+      .eq("id", boatId);
 
-    if (boatError) {
-      console.error("Boat delete error:", boatError);
+    if (error) {
+      console.error(error);
 
       return NextResponse.json(
-        { error: boatError.message },
+        { error: error.message },
         { status: 500 }
-      );
-    }
-
-    if (!data || data.length === 0) {
-      return NextResponse.json(
-        {
-          error:
-            "No boat was deleted. Check RLS policies and ownership.",
-        },
-        { status: 403 }
       );
     }
 
     return NextResponse.json({
       success: true,
-      deletedBoat: data,
     });
   } catch (error) {
     console.error(error);
