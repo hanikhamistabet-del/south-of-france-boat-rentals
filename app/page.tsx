@@ -5,9 +5,12 @@ export default function Home() {
       <nav className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold">
-              SOF Boat Rentals
-            </h1>
+            <h1
+  className="text-3xl md:text-4xl font-bold"
+  translate="no"
+>
+  SOF Boat Rentals
+</h1>
 
             <p className="text-xs tracking-[0.3em] text-gray-400 mt-1">
               SOUTH OF FRANCE & MEDITERRANEAN
@@ -139,11 +142,11 @@ export default function Home() {
           </p>
 
           <a
-            href="/signup"
-            className="inline-block mt-8 bg-white text-black px-8 py-4 rounded-xl font-semibold"
-          >
-            Create Free Account
-          </a>
+  href="/signup"
+  className="inline-block mt-8 bg-slate-950 hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-semibold transition"
+>
+  List Your Boat Free
+</a>
         </div>
       </section>
 
@@ -177,11 +180,12 @@ export default function Home() {
               <h4 className="font-semibold mb-3">Support</h4>
 
               <a
-                href="mailto:sofboatrental@gmail.com"
-                className="text-gray-400 block"
-              >
-                sofboatrental@gmail.com
-              </a>
+  href="mailto:sofboatrental@gmail.com"
+  className="text-gray-400 block"
+  translate="no"
+>
+  sofboatrental@gmail.com
+</a>
 
               <p className="text-gray-500 text-sm mt-4">
                 SOF Boat Rentals acts solely as a listing platform. Boat owners
