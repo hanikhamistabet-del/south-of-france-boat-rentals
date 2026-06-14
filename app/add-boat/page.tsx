@@ -47,14 +47,45 @@ const [photoCount, setPhotoCount] = useState(0);
     } = await supabase.auth.getUser();
 
     if (!user) {
-      alert("Please log in first.");
-      return;
-    }
+  alert("Please log in first.");
+  return;
+}
 
-    const { data: boatData, error: boatError } =
-      await supabase
-        .from("boats")
-        .insert([
+// Prevent duplicate boat names for same user
+const { data: duplicateBoat } = await supabase
+  .from("boats")
+  .select("id")
+  .eq("user_id", user.id)
+  .eq("name", name.trim())
+  .maybeSingle();
+
+if (duplicateBoat) {
+  alert(
+    "You already have a boat with this name."
+  );
+  return;
+}
+
+// Free account = 1 boat
+const { data: existingBoats } = await supabase
+  .from("boats")
+  .select("id")
+  .eq("user_id", user.id);
+
+if (
+  existingBoats &&
+  existingBoats.length >= 1
+) {
+  alert(
+    "Free accounts can only list one boat. Upgrade to Premium for unlimited listings."
+  );
+  return;
+}
+
+const { data: boatData, error: boatError } =
+  await supabase
+    .from("boats")
+    .insert([
           {
             user_id: user.id,
             name,
