@@ -12,28 +12,34 @@ export default function DeleteBoatButton({
 
     if (!confirmed) return;
 
-    const response = await fetch(
-      "/api/delete-boat",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-        body: JSON.stringify({
-          boatId,
-        }),
+    try {
+      const response = await fetch(
+        "/api/delete-boat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            boatId,
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        alert(result.error || "Delete failed");
+        return;
       }
-    );
 
-    if (!response.ok) {
+      alert("Boat deleted successfully");
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
       alert("Delete failed");
-      return;
     }
-
-    alert("Boat deleted!");
-
-    window.location.reload();
   }
 
   return (
