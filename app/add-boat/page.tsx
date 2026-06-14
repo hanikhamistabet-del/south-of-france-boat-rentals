@@ -85,10 +85,12 @@ const [photoCount, setPhotoCount] = useState(0);
   alert("Maximum 5 photos allowed");
   return;
 }
-      const files =
-        Array.from(photos).slice(0, 5);
 
-      for (const photo of files) {
+if (photos && photos.length > 0) {
+
+  const files = Array.from(photos).slice(0, 5);
+
+  for (const photo of files) {
         const safeFileName =
           `${Date.now()}-${photo.name}`.replace(
             /[^a-zA-Z0-9.-]/g,

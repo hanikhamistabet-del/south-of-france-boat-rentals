@@ -41,110 +41,117 @@ export default function DashboardPage() {
 
   async function handleLogout() {
     await supabase.auth.signOut();
-
     window.location.href = "/";
   }
 
   if (loading) {
     return (
-  <main className="min-h-screen bg-slate-950 text-white p-4 md:p-6 overflow-x-hidden">
-
-    <div className="max-w-6xl mx-auto">
-
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-8">
-
-        <h1 className="text-4xl md:text-5xl font-bold">
-          Dashboard
+      <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
+        <h1 className="text-3xl font-bold">
+          Loading...
         </h1>
+      </main>
+    );
+  }
 
-        <div className="flex flex-wrap gap-3">
+  return (
+    <main className="min-h-screen bg-slate-950 text-white p-4 md:p-6 overflow-x-hidden">
+      <div className="max-w-6xl mx-auto">
 
-          <a
-            href="/add-boat"
-            className="bg-blue-600 px-4 py-3 rounded-lg text-center"
-          >
-            Add Boat
-          </a>
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-8">
 
-          <a
-            href="/bookings"
-            className="bg-purple-600 px-4 py-3 rounded-lg text-center"
-          >
-            Bookings
-          </a>
+          <h1 className="text-4xl md:text-5xl font-bold">
+            Dashboard
+          </h1>
 
-          <button
-            onClick={handleLogout}
-            className="bg-red-600 px-4 py-3 rounded-lg"
-          >
-            Logout
-          </button>
+          <div className="flex flex-wrap gap-3">
 
-        </div>
-
-      </div>
-
-      {boats.length === 0 ? (
-        <div className="bg-slate-900 p-8 rounded-2xl text-center">
-
-          <h2 className="text-2xl font-bold">
-            No Boats Yet
-          </h2>
-
-          <p className="text-gray-400 mt-3">
-            Add your first boat listing.
-          </p>
-
-        </div>
-      ) : (
-        <div className="grid gap-6">
-
-          {boats.map((boat) => (
-            <div
-              key={boat.id}
-              className="bg-slate-900 p-6 rounded-2xl"
+            <a
+              href="/add-boat"
+              className="bg-blue-600 px-4 py-3 rounded-lg text-center"
             >
-              <h2 className="text-2xl md:text-3xl font-bold break-words">
-                {boat.name}
-              </h2>
+              Add Boat
+            </a>
 
-              <p className="mt-2 text-gray-400">
-                {boat.location}
-              </p>
+            <a
+              href="/bookings"
+              className="bg-purple-600 px-4 py-3 rounded-lg text-center"
+            >
+              Bookings
+            </a>
 
-              <p className="mt-2">
-                €{boat.price_per_day}/day
-              </p>
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 px-4 py-3 rounded-lg"
+            >
+              Logout
+            </button>
 
-              <div className="flex flex-wrap gap-3 mt-6">
+          </div>
 
-                <a
-                  href={`/boats/${boat.id}`}
-                  className="bg-blue-600 px-4 py-2 rounded-lg"
-                >
-                  View
-                </a>
+        </div>
 
-                <a
-                  href={`/edit-boat/${boat.id}`}
-                  className="bg-green-600 px-4 py-2 rounded-lg"
-                >
-                  Edit
-                </a>
+        {boats.length === 0 ? (
+          <div className="bg-slate-900 p-8 rounded-2xl text-center">
 
-                <DeleteBoatButton
-                  boatId={boat.id}
-                />
+            <h2 className="text-2xl font-bold">
+              No Boats Yet
+            </h2>
+
+            <p className="text-gray-400 mt-3">
+              Add your first boat listing.
+            </p>
+
+          </div>
+        ) : (
+          <div className="grid gap-6">
+
+            {boats.map((boat) => (
+              <div
+                key={boat.id}
+                className="bg-slate-900 p-6 rounded-2xl"
+              >
+                <h2 className="text-2xl md:text-3xl font-bold break-words">
+                  {boat.name}
+                </h2>
+
+                <p className="mt-2 text-gray-400">
+                  {boat.location}
+                </p>
+
+                <p className="mt-2">
+                  €{boat.price_per_day}/day
+                </p>
+
+                <div className="flex flex-wrap gap-3 mt-6">
+
+                  <a
+                    href={`/boats/${boat.id}`}
+                    className="bg-blue-600 px-4 py-2 rounded-lg"
+                  >
+                    View
+                  </a>
+
+                  <a
+                    href={`/edit-boat/${boat.id}`}
+                    className="bg-green-600 px-4 py-2 rounded-lg"
+                  >
+                    Edit
+                  </a>
+
+                  <DeleteBoatButton
+                    boatId={boat.id}
+                  />
+
+                </div>
 
               </div>
+            ))}
 
-            </div>
-          ))}
+          </div>
+        )}
 
-        </div>
-      )}
-
-    </div>
-
-  </main>
-);
+      </div>
+    </main>
+  );
+}
