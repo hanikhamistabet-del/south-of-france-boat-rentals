@@ -1,6 +1,8 @@
 import { supabase } from "@/lib/supabase";
 import BoatsList from "@/app/components/BoatsList";
 
+export const dynamic = "force-dynamic";
+
 export default async function BoatsPage() {
   const { data: boats, error } = await supabase
     .from("boats")
