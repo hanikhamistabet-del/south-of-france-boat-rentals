@@ -18,6 +18,7 @@ export default function AddBoatPage() {
   const [email, setEmail] = useState("");
 
   const [photos, setPhotos] = useState<FileList | null>(null);
+const [photoCount, setPhotoCount] = useState(0);
 
   useEffect(() => {
     async function checkUser() {
@@ -80,7 +81,10 @@ export default function AddBoatPage() {
 
     const boatId = boatData.id;
 
-    if (photos && photos.length > 0) {
+    if (photos && photos.length > 5) {
+  alert("Maximum 5 photos allowed");
+  return;
+}
       const files =
         Array.from(photos).slice(0, 5);
 
@@ -248,15 +252,40 @@ export default function AddBoatPage() {
             className="w-full p-4 rounded-lg bg-white text-black"
           />
 
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={(e) =>
-              setPhotos(e.target.files)
-            }
-            className="w-full p-4 rounded-lg bg-slate-800"
-          />
+          <div className="space-y-2">
+
+  <label className="block text-lg font-semibold">
+    Photos ({photoCount}/5)
+  </label>
+
+  <input
+    type="file"
+    multiple
+    accept="image/*"
+    onChange={(e) => {
+      const files = e.target.files;
+
+      if (!files) return;
+
+      if (files.length > 5) {
+        alert("Maximum 5 photos allowed.");
+        e.target.value = "";
+        setPhotos(null);
+        setPhotoCount(0);
+        return;
+      }
+
+      setPhotos(files);
+      setPhotoCount(files.length);
+    }}
+    className="w-full p-4 rounded-lg bg-slate-800"
+  />
+
+  <p className="text-sm text-gray-400">
+    Maximum 5 photos. The first photo will be used as the cover image.
+  </p>
+
+</div>
 
           <textarea
             rows={5}
